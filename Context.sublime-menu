@@ -1,0 +1,7 @@
+[
+{
+    "id" : "Pretty_indent",
+    "caption" : "Pretty Indent",
+	"command" : "pretty_indent"
+}
+]
