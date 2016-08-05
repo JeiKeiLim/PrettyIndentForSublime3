@@ -13,10 +13,13 @@ def pretty_print_json(data):
     tab_num = 0
     data = str(data)
 
+    data = re.sub("[\n]*", " ", data)
+    data = re.sub("[\t]+", " ", data)
+    data = re.sub("[ ]+", " ", data)
+
     result = ""
 
     for i in range(len(data)):
-
         if data[i] == '{' or data[i] == '[':
             result += "\n" + make_tab(tab_num) + data[i] + "\n"
             tab_num += 1
