@@ -35,7 +35,8 @@ def pretty_print_json(data):
         else:
             result += data[i]
 
-    result = re.sub("[}\]]\n[\t]*,", "},", result)
+    result = re.sub("\]\n[\t]*,", "],", result)
+    result = re.sub("}\n[\t]*,", "},", result)
     result = re.sub("\n[\t]*[\n]+", "\n", result)
 
     return result
