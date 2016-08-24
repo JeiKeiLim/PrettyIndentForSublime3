@@ -13,7 +13,6 @@ def pretty_print_json(data):
     tab_num = 0
     data = str(data)
 
-    data = re.sub("[\n]*", " ", data)
     data = re.sub("[\t]+", " ", data)
     data = re.sub("[ ]+", " ", data)
 
@@ -30,8 +29,6 @@ def pretty_print_json(data):
             result += make_tab(tab_num) + data[i] + "\n" + make_tab(tab_num)
         elif data[i] == ',':
             result += data[i] + "\n" + make_tab(tab_num)
-        elif data[i] == ' ':
-            result += ''
         else:
             result += data[i]
 
