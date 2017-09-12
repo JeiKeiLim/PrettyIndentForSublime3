@@ -2,11 +2,11 @@ import sublime, sublime_plugin
 import re
 
 def make_tab(tab_num):
-	    result = ""
-	    for j in range(tab_num):
-	        result += "\t"
+        result = ""
+        for j in range(tab_num):
+            result += "\t"
 
-	    return result
+        return result
 
 
 def pretty_print_json(data):
@@ -18,7 +18,20 @@ def pretty_print_json(data):
 
     result = ""
 
+    str_start = False
     for i in range(len(data)):
+        if data[i] == '"':
+            if str_start == False:
+                str_start = True
+            else:
+                str_start = False
+            result += data[i]
+            continue
+
+        if str_start:
+            result += data[i]
+            continue
+
         if data[i] == '{' or data[i] == '[':
             result += "\n" + make_tab(tab_num) + data[i] + "\n"
             tab_num += 1
@@ -40,8 +53,8 @@ def pretty_print_json(data):
 
 class Pretty_indentCommand(sublime_plugin.TextCommand):
 
-	def run(self, edit):
-		text = self.view.substr(sublime.Region(0, self.view.size()))
-		text = pretty_print_json(text)
-		self.view.erase(edit, sublime.Region(0, self.view.size()))
-		self.view.insert(edit, 0, text)
+    def run(self, edit):
+        text = self.view.substr(sublime.Region(0, self.view.size()))
+        text = pretty_print_json(text)
+        self.view.erase(edit, sublime.Region(0, self.view.size()))
+        self.view.insert(edit, 0, text)
